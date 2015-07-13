@@ -841,6 +841,37 @@ class SphinxClient
     }
 
     /**
+     * Set values filter; only match records where $attribute value is in (or not in) the given set
+     *
+     * @param string  $attribute attribute name
+     * @param string   $value    value
+     * @param boolean $exclude   whether the filter is exclusive or inclusive
+     *
+     * @return SphinxClient
+     * @throws \InvalidArgumentException When attribute name or value array is invalid
+     */
+    public function setFilterString($attribute, $value, $exclude = false)
+    {
+        if (!is_string($attribute)) {
+            throw new \InvalidArgumentException('Attribute name must be a string.');
+        }
+
+        if (!is_string($value)) {
+            throw new \InvalidArgumentException('Value must be a string.');
+        }
+
+        $exclude = (Boolean) $exclude;
+        $this->filters[] = array(
+            'type' => self::SPH_FILTER_STRING,
+            'attr' => $attribute,
+            'exclude' => $exclude,
+            'values' => $value
+        );
+
+        return $this;
+    }
+
+    /**
      * Set range filter; only match records if $attribute value between $min and $max (inclusive)
      *
      * @param string  $attribute attribute name
@@ -1390,6 +1421,9 @@ class SphinxClient
                     break;
                 case self::SPH_FILTER_FLOATRANGE:
                     $req .= $this->packFloat($filter['min']) . $this->packFloat($filter['max']);
+                    break;
+                case self::SPH_FILTER_STRING:
+                    $req .= pack ( "N", strlen($filter["value"]) ) . $filter["value"];
                     break;
                 default:
                     throw new \InvalidArgumentException('internal error: unhandled filter type');
