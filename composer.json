@@ -1,7 +1,8 @@
 {
-    "name": "gigablah/sphinxphp",
+    "name": "Floxxx/sphinxphp",
     "type": "library",
     "description": "Sphinx Search PHP 5.3+ API with PSR compliance",
+    "version": "2.0.10",
     "keywords": ["sphinx","search","api"],
     "homepage": "http://sphinxsearch.com/",
     "license": "GPL-2.0",
