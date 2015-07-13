@@ -856,7 +856,7 @@ class SphinxClient
             throw new \InvalidArgumentException('Attribute name must be a string.');
         }
 
-        if (!is_array($value)) {
+        if (!is_string($value)) {
             throw new \InvalidArgumentException('Value must be a string.');
         }
 
