@@ -301,6 +301,18 @@ class SphinxClientTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
+    public function testSetFilterString()
+    {
+        $sphinx = new SphinxClient();
+        $sphinx->setFilterString('attr', '184467440737095516160', true);
+        $this->assertSame($sphinx->filters[0], array(
+            'type' => SphinxClient::SPH_FILTER_STRING,
+            'attr' => 'attr',
+            'exclude' => true,
+            'value' => '184467440737095516160'
+        ));
+    }
+
     public function testSetFilterRange()
     {
         $sphinx = new SphinxClient();
