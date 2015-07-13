@@ -90,6 +90,7 @@ class SphinxClient
     const SPH_FILTER_VALUES          = 0;
     const SPH_FILTER_RANGE           = 1;
     const SPH_FILTER_FLOATRANGE      = 2;
+    const SPH_FILTER_STRING          = 3;
 
     /**
      * Known attribute types.
